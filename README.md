@@ -19,7 +19,9 @@ In server.R script following steps are executed.
    shiny 
    ROCR
 2. load pima dataset from faraway package
+
 3. Perform data cleaning to remove observations with zero glucose level,dialostic,triceps etc.
+    
      pima$glucose[pima$glucose==0]<-NA
      pima$diastolic[pima$diastolic==0]<-NA
      pima$triceps[pima$triceps==0]<-NA
@@ -27,14 +29,19 @@ In server.R script following steps are executed.
      pima$bmi[pima$bmi==0]<-NA
 
     # In the dataset column test=1 shows patient has diabetes and test=0 shows patient donot have diabetes.
+    Formulate Model for logistic regression
+   logitmod1 <- glm(test~., data=pima1,family=binomial)
+   
 4. Formulate Model for logistic regression
    logitmod1 <- glm(test~., data=pima1,family=binomial) 
+
 5. Develope shiny server function that capture patient information and uses above model algorithm to determine probablity 
    of getting diabetes.
-    Below is snippet of server.R code that calculate probablity.
-     output$prediction <- renderText( {
-        data <- constructData()  			
-        score <- round(predict(logitmod1, newdata=data, type="response"),3)
+    
+     Below is snippet of server.R code that calculate probablity.
+      output$prediction <- renderText( {
+      data <- constructData()  			
+      score <- round(predict(logitmod1, newdata=data, type="response"),3)
       paste("Patient Likelihood of getting diabetes is :", score[1])  
 
 
