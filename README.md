@@ -59,7 +59,7 @@ the following snippets of ui.R code is used to develop input sliders and text to
 The main panel is used to organize how the user interface looks.
 We use the tabpanelset to create tabs thats shows different output.
 
-  mainPanel(
+#  mainPanel(
       tabsetPanel(
         
         tabPanel("UserGuide",
