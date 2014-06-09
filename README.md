@@ -28,18 +28,17 @@ In server.R script following steps are executed.
      pima$insulin[pima$insulin==0]<-NA
      pima$bmi[pima$bmi==0]<-NA
 
-    # In the dataset column test=1 shows patient has diabetes and test=0 shows patient donot have diabetes.
-    Formulate Model for logistic regression
-   logitmod1 <- glm(test~., data=pima1,family=binomial)
-   
+     In the dataset column test=1 shows patient has diabetes and test=0 shows patient donot have diabetes.
+    
 4. Formulate Model for logistic regression
    logitmod1 <- glm(test~., data=pima1,family=binomial) 
 
 5. Develope shiny server function that capture patient information and uses above model algorithm to determine probablity 
    of getting diabetes.
-    
+
      Below is snippet of server.R code that calculate probablity.
-      output$prediction <- renderText( {
+
+.     output$prediction <- renderText( {
       data <- constructData()  			
       score <- round(predict(logitmod1, newdata=data, type="response"),3)
       paste("Patient Likelihood of getting diabetes is :", score[1])  
@@ -65,8 +64,8 @@ the following snippets of ui.R code is used to develop input sliders and text to
 
 The main panel is used to organize how the user interface looks.
 We use the tabpanelset to create tabs thats shows different output.
-
-#  mainPanel(
+    
+    mainPanel(
       tabsetPanel(
         
         tabPanel("UserGuide",
