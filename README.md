@@ -18,7 +18,7 @@ In server.R script following steps are executed.
    faraway
    shiny 
    ROCR
-2. load pima dataset from faraway package
+2. load pima dataset from faraway package.
 
 3. Perform data cleaning to remove observations with zero glucose level,dialostic,triceps etc.
     
@@ -30,21 +30,23 @@ In server.R script following steps are executed.
 
      In the dataset column test=1 shows patient has diabetes and test=0 shows patient donot have diabetes.
     
-4. Formulate Model for logistic regression
+4. Formulate Model for logistic regression.
+ 
    logitmod1 <- glm(test~., data=pima1,family=binomial) 
 
 5. Develope shiny server function that capture patient information and uses above model algorithm to determine probablity 
    of getting diabetes.
 
-     Below is snippet of server.R code that calculate probablity.
-
-.     output$prediction <- renderText( {
+     Below is snippet of server.R code that calculate probablity
+     
+      output$prediction <- renderText( {
       data <- constructData()  			
       score <- round(predict(logitmod1, newdata=data, type="response"),3)
       paste("Patient Likelihood of getting diabetes is :", score[1])  
-
-
+      
 6. The model summary and model diagnostic plots are also displayed.
+
+# User Interface #
 
 
 In ui.R script,
@@ -63,8 +65,8 @@ the following snippets of ui.R code is used to develop input sliders and text to
       submitButton('Submit')
 
 The main panel is used to organize how the user interface looks.
-We use the tabpanelset to create tabs thats shows different output.
-    
+We use the tabpanelset to create tabs thats shows different output
+
     mainPanel(
       tabsetPanel(
         
@@ -88,8 +90,6 @@ We use the tabpanelset to create tabs thats shows different output.
                plotOutput("plot4"),
                plotOutput("plot5"),
                plotOutput("plot6")) 
-      
-  )
- )
+      ))
  
  
